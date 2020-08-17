@@ -27,7 +27,7 @@
             <router-link to="/systemManage/company/companyUser">系统管理</router-link>
           </div>
           <div @click="changeNavMenu(2)" :class="[{ active: current === 2 }]">
-            <router-link to="/screen/home">数据监控大屏</router-link>
+            <router-link to="/screen/home" target="_blank">数据监控大屏</router-link>
           </div>
         </div>
       </div>
