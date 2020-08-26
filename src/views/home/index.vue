@@ -260,7 +260,6 @@ export default {
       update: function(anim) {
         anime.set('.item', {
           translateY: function(el, i, l) {
-            console.log(yTrans[i].y % 294)
             return yTrans[i].y % 294
           }
         })
