@@ -13,6 +13,7 @@
     "test:ci": "npm run lint && npm run test:unit"
   },
   "dependencies": {
+    "animejs": "^3.2.0",
     "axios": "0.18.1",
     "core-js": "3.6.5",
     "echarts": "^4.8.0",

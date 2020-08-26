@@ -91,6 +91,15 @@
               </ul>
             </panel-list>
           </div>
+          <div class="tips">
+            <div style="overflow:hidden;height:100%">
+              <div class="container">
+                <div v-for="(item, index) in reverseTips" :key="index" class="item">
+                  {{ item.text }}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="mainContainer flexC">
@@ -207,16 +216,56 @@
 <script>
 import HomePageHeader from '@/components/HomePageHeader'
 import PanelList from '@/components/PanelList'
+import anime from 'animejs/lib/anime.es.js'
 
 export default {
   components: {
     HomePageHeader,
     PanelList
   },
+  computed: {
+    reverseTips() {
+      return this.tips.reverse()
+    }
+  },
   data() {
     return {
-      input: ''
+      input: '',
+      tips: [
+        { text: '11:32 在平台进行牛栏山百年红(10)的追溯信息验证' },
+        { text: '10:22 在平台进行茅台王子酒的追溯信息验证' },
+        { text: '10:13 在平台进行仁酒(和天下)的追溯信息验证' },
+        { text: '10:02 在平台进行汉酱酒(135BC)的追溯信息验证' },
+        { text: '9:54 在平台进行华茅酒(鉴藏)的追溯信息验证' },
+        { text: '08:32 在平台进行茅台王子酒(酱色)的追溯信息验证' },
+        { text: '06:12 在平台进行汉酱酒(135BC)的追溯信息验证' }
+      ]
     }
+  },
+  mounted() {
+    let yTrans = []
+    anime.set('.item', {
+      translateY: function(el, i, l) {
+        yTrans[i] = { y: i * -42 }
+        return i * -42
+      }
+    })
+    anime({
+      targets: yTrans,
+      delay: 2000,
+      duration: 10000, //走一周持续时间
+      easing: 'linear',
+      y: '-=294',
+      loop: true,
+      update: function(anim) {
+        anime.set('.item', {
+          translateY: function(el, i, l) {
+            console.log(yTrans[i].y % 294)
+            return yTrans[i].y % 294
+          }
+        })
+      }
+    })
   },
   methods: {}
 }
@@ -258,6 +307,40 @@ export default {
   display: flex;
   background: #fff;
   padding: 12px;
+  position: relative;
+  .tips {
+    position: absolute;
+    content: '';
+    top: 0px;
+    right: -211px;
+    width: 202px;
+    height: 304px;
+    background: url('../../assets/img/tips-bg.png');
+    background-size: 100% 100%;
+    padding: 49px 14px 0 14px;
+    overflow: hidden;
+    .container {
+      position: relative;
+      top: 252px;
+    }
+    .item {
+      position: absolute;
+      font-size: 12px;
+      font-family: STSongti, STSongti-SC;
+      font-weight: SC;
+      text-align: left;
+      color: #333333;
+      line-height: 17px;
+      // margin-bottom: 8px;
+      // position: relative;
+      &::before {
+        position: absolute;
+        content: '.';
+        top: -3px;
+        left: -5px;
+      }
+    }
+  }
 }
 .ellipses {
   // width: 270px;
